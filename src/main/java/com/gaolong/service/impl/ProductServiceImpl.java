@@ -23,20 +23,35 @@ public class ProductServiceImpl implements ProductService {
     public Map pageSelectProduct(String name, int PageNum, int PageSize){
         Map map=new HashMap();
         PageHelper.startPage(PageNum,PageSize);
+
         String names=null;
         if(name!=null){
             names="%"+name+"%";
         }
+        int end=(PageNum-1)*PageSize+1;
+        int start=PageNum*PageSize;
+       // List<Product> listt=productDao.pageProduct(name, end, start);
+
         System.out.println("PageNum-->"+PageNum);
         System.out.println("PageSize-->"+PageSize);
         List<Product> list=productDao.pageSelectProduct(names);
         PageInfo<Product> studentPageInfont =new PageInfo<>(list);
+        System.out.println("studentPageInfont-=-->"+studentPageInfont);
+        for (Product product : list) {
+            System.out.println(product);
+        }
         map.put("rows", list);
         map.put("total", studentPageInfont.getTotal());
 
         System.out.println("studentPageInfont.getTotal()-->"+studentPageInfont.getTotal());
 
         return map;
+    }
+
+    @Override
+    public void deleteProductAll(int []ids){
+        productDao.deleteProductAll(ids);
+
     }
 
 }

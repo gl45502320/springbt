@@ -17,6 +17,28 @@
         on p.cid=c.category_id
 
     </select>
+    <select id="pageProduct" resultType="Product" >
+      select p.*,c.category_name
+        from
+        (select book_id,cid,book_name,product_image,book_price,Dangprice,inventory,author,press,salenum,custome_score
+        from dd_product
+        <if test="book_name !=null and book_name!=''">
+
+         where book_name like #{book_name}
+        </if>
+        )p LEFT JOIN dd_category c
+        on p.cid=c.category_id
+
+        where #{end} LIMIT #{start}
+
+    </select>
+
+    <delete id="deleteProductAll">
+        delete from dd_product where book_id in
+        <foreach collection="array" open="(" close=")" separator="," item="ids">
+            #{ids}
+        </foreach>
+    </delete>
 
 	
 </mapper>

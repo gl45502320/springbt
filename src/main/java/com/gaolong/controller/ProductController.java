@@ -21,4 +21,20 @@ public class ProductController {
         return productService.pageSelectProduct(name, page, rows);
 
     }
+
+    @RequestMapping("/deleteAll")
+    public @ResponseBody boolean deleteAll(int []ids){
+        for (int i = 0; i < ids.length; i++) {
+            int id = ids[i];
+            System.out.println("ids[i]-->"+ids[i]);
+        }
+        try {
+            productService.deleteProductAll(ids);
+            return true;
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -49,9 +49,11 @@ $(function(){
       url:"pageSelectProduct.long",
       // title:"学生信息表",
       pagination:true,
-      singleSelect:true,
+      //singleSelect:true,
       //width:700,
       columns:[[
+          {checkbox:true,field:""},
+          {field:"book_id",title:"ID",align:"center",width:100},
           {field:"book_name",title:"书名",align:"center",width:100},
           {field:"product_image",title:"图书封面",align:"center",width:100,
               formatter:function(value,rowData,rowIndex){
@@ -84,6 +86,38 @@ $(function(){
   });
   //展示数据===================【END】=====================
 })
+//批量删除============(START)=======================
+function piliangdelete(){
+    //alert(0);
+    var allRows=$("#myTable").datagrid("getSelections");
+    if(allRows.length==0){
+        alert("请选中要删除的数据");
+    }else{
+        var isConfirm=confirm("确认删除？");
+        //alert(isConfirm);
+        if(isConfirm){
+            var ids=new Array(allRows.length);
+            for(var i=0;i<allRows.length;i++){
+                ids[i]=allRows[i].book_id;
+                alert("allRows[i].id"+allRows[i].book_id);
+            }
+            //发ajax请求
+            $.ajax({
+                url:"deleteAll.long",
+                data:"ids="+ids,
+                success:function(data){
+                    if(data){
+                        alert("删除成功");
+                        $("#myTable").datagrid("reload");//刷新页面信息
+                    }else{
+                        alert("删除失败");
+                    }
+                }
+            });
+        }
+    }
+}
+//批量删除============(END)=========================
 </script>
   </head>
   <body class="easyui-layout">
@@ -165,6 +199,12 @@ $(function(){
     	<ul id="mainul"></ul>
     </div>   
     <div id="center" data-options="region:'center',title:'数据展示'" >
+      <!-- 工具栏对应的div -->
+      <div id="mytoolbar">
+        <!-- 查询 -->
+        <a href="JavaScript:void(0)" class="easyui-linkbutton" id="dianji1" onclick="dianji1()" data-options="iconCls:'icon-add'" >添加</a>
+        <a href="JavaScript:void(0)" class="easyui-linkbutton" id="piliangdelete" onclick="piliangdelete()" data-options="iconCls:'icon-remove'" >批量删除</a>
+      </div>
       <table id="myTable"></table>
       <!-- 框架集   代表页面中的一个子窗口-->
     	<iframe id='myiframe' frameborder=0 height="100%" width="100%" marginheight=0 marginwidth=0 scrolling=no src="${pageContext.request.contextPath}/main/main1.jsp">

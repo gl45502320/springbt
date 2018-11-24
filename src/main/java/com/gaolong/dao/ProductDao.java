@@ -10,9 +10,11 @@ public interface ProductDao {
     //调用jar工具分页查询
     public List<Product> pageSelectProduct(@Param("book_name")String book_name);
 
-    public List<Product> pageProduct(@Param("book_name")String book_name,@Param("end")int end,@Param("start")int start);
+    public List<Product> pageProduct(@Param("book_name")String book_name,@Param("start")int start,@Param("pageSize")int pageSize);
 
 
     public void deleteProductAll(int []ids);
+
+    public int countProduct(@Param("book_name")String book_name);
 
 }

@@ -18,18 +18,34 @@
 
     </select>
     <select id="pageProduct" resultType="Product" >
-      select p.*,c.category_name
+     select t.* from
+        (select p.*,c.category_name
         from
         (select book_id,cid,book_name,product_image,book_price,Dangprice,inventory,author,press,salenum,custome_score
         from dd_product
         <if test="book_name !=null and book_name!=''">
-
-         where book_name like #{book_name}
+            where book_name like #{book_name}
         </if>
         )p LEFT JOIN dd_category c
         on p.cid=c.category_id
+        )t
+         LIMIT #{start},#{pageSize};
 
-        where #{end} LIMIT #{start}
+    </select>
+
+    <select id="countProduct" resultType="int">
+        select count(*) from
+        (select p.*,c.category_name
+        from
+        (select book_id,cid,book_name,product_image,book_price,Dangprice,inventory,author,press,salenum,custome_score
+        from dd_product
+        <if test="book_name !=null and book_name!=''">
+            where book_name like #{book_name}
+        </if>
+        )p LEFT JOIN dd_category c
+        on p.cid=c.category_id
+        )t
+
 
     </select>
 

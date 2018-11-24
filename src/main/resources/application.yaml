@@ -38,11 +38,9 @@ mybatis:
   type-aliases-package: com.gaolong.entity
   mapper-locations: com/gaolong/dao/*Dao.xml
 
-
-
-
-
-
-
-
-
+#分页
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql

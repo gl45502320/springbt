@@ -51,6 +51,10 @@ $(function(){
       pagination:true,
       //singleSelect:true,
       //width:700,
+      pageList:[5,10,20,30],
+      pageSize:5,
+      toolbar:"#mytoolbar",
+      fitColumns:true,
       columns:[[
           {checkbox:true,field:""},
           {field:"book_id",title:"ID",align:"center",width:100},
@@ -70,7 +74,7 @@ $(function(){
           {field:"press",title:"出版社",align:"center",width:100},
           {field:"salenum",title:"销量",align:"center",width:100},
           {field:"custome_score",title:"顾客评分",align:"center",width:100},
-          {field:"category_name",title:"所属类别",align:"center",width:100},
+          {field:"category_name",title:"所属类别",align:"center",width:100}
           // {
           //     title:"操作",field:"renyi",align:"center",
           //     //value:值，属性获取到的值
@@ -207,7 +211,7 @@ function piliangdelete(){
       </div>
       <table id="myTable"></table>
       <!-- 框架集   代表页面中的一个子窗口-->
-    	<iframe id='myiframe' frameborder=0 height="100%" width="100%" marginheight=0 marginwidth=0 scrolling=no src="${pageContext.request.contextPath}/main/main1.jsp">
+    	<%--<iframe id='myiframe' frameborder=0 height="100%" width="100%" marginheight=0 marginwidth=0 scrolling=no src="${pageContext.request.contextPath}/main/main1.jsp">--%>
     			
     	</iframe>
     	

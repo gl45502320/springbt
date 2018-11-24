@@ -1,6 +1,6 @@
 server:
   port: 9999
-  context-path: /springbt
+  context-path: /ddw
 
 #  热部署
   jsp-servlet:
@@ -12,10 +12,10 @@ server:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:oracle:thin:@localhost:1521:XE
-    driver-class-name: oracle.jdbc.OracleDriver
-    username: auction
-    password: auction
+    url: jdbc:mysql://localhost:3306/ddw
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
 
 #    视图解析器
   mvc:
@@ -34,9 +34,9 @@ spring:
       charset: utf-8
       force: true
 
-#mybatis:
-#  type-aliases-package: com.gaolong.entity
-#  mapper-locations: com/gaolong/dao/*Dao.xml
+mybatis:
+  type-aliases-package: com.gaolong.entity
+  mapper-locations: com/gaolong/dao/*Dao.xml
 
 
 

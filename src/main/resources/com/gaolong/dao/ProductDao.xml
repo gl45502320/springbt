@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<!-- namespace的值是Dao接口的全限定名 -->
+<mapper namespace="com.gaolong.dao.ProductDao">
+
+    <select id="pageSelectProduct" resultType="Product" >
+      select p.*,c.category_name
+        from
+        (select book_id,cid,book_name,product_image,book_price,Dangprice,inventory,author,press,salenum,custome_score
+        from dd_product
+        <if test="book_name !=null and book_name!=''">
+
+         where book_name like #{book_name}
+        </if>
+        )p LEFT JOIN dd_category c
+        on p.cid=c.category_id
+
+    </select>
+
+	
+</mapper>
+
+
